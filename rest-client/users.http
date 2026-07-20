@@ -1,0 +1,45 @@
+### GET all users
+GET http://localhost:3000/api/users
+
+
+
+### GET a user by ID
+GET http://localhost:3000/api/users/1
+
+
+
+### register a new user
+POST http://localhost:3000/api/users/auth/register
+Content-Type: application/json
+
+{ 
+    "username":"newUser",
+    "email":"newuser2@example.com",
+    "password":"password123"
+}
+
+
+
+### Login using an existing account
+POST http://localhost:3000/api/users/auth/login
+Content-Type: application/json
+
+{ 
+    "email":"newuser2@example.com",
+    "password":"password123"
+}
+
+
+
+### update a review data
+PUT http://localhost:3000/api/reviews/1
+Content-Type: application/json
+ 
+{ 
+    "rating":"New review"
+}
+
+
+
+### Delete a user by ID
+DELETE http://localhost:3000/api/users/1

@@ -1,0 +1,83 @@
+{
+  "cSpell.words": ["aint", "dont", "dotenv", "dtos", "pids"],
+  "sqltools.connections": [
+    {
+      "ssh": "Disabled",
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "nest-course-db",
+      "username": "postgres",
+      "database": "nest-course-db"
+    }
+  ],
+  // Editor Settings
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": false,
+
+  // TypeScript Settings
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  // ESLint Settings
+  "eslint.validate": ["javascript", "typescript"],
+  "eslint.format.enable": false,
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+
+  // Prettier Settings
+  "prettier.requireConfig": true,
+  "prettier.useEditorConfig": false,
+
+  // Files Settings
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.eol": "\n",
+
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#1b91b2",
+    "activityBar.background": "#1b91b2",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#f2ace3",
+    "activityBarBadge.foreground": "#15202b",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#1b91b2",
+    "statusBar.background": "#146d86",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#1b91b2",
+    "statusBarItem.remoteBackground": "#ea74d0",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#146d86",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#146d8699",
+    "titleBar.inactiveForeground": "#e7e7e799",
+    "activityBarTop.activeBackground": "#1b91b2",
+    "activityBarTop.background": "#1b91b2",
+    "activityBarTop.foreground": "#e7e7e7",
+    "activityBarTop.inactiveForeground": "#e7e7e799",
+    "commandCenter.foreground": "#e7e7e7",
+    "statusBar.debuggingBackground": "#146d86",
+    "statusBar.debuggingForeground": "#e7e7e7"
+  },
+  "peacock.color": "#146d86"
+}

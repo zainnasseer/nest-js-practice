@@ -1,0 +1,28 @@
+### GET all products
+GET http://localhost:3000/api/products
+
+### GET a product by ID
+GET http://localhost:3000/api/products/1
+
+### Create a new product
+POST http://localhost:3000/api/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiam9obiIsImVtYWlsIjoiam9obmRvaUBleGFtcGxlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc0NDM0NzY3NSwiZXhwIjoxNzQ0MzQ4NTc1fQ.2246122461224612246122461224612246122461224612246122461224612246
+
+{
+    "title":"New product",
+    "description":"This is a new product",
+    "price":99
+}
+
+
+### update a product data
+PUT http://localhost:3000/api/products/18
+Content-Type: application/json
+
+{
+    "title":"updated product"
+}
+
+### Delete a product by ID
+DELETE http://localhost:3000/api/products/17

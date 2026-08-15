@@ -45,7 +45,7 @@ export class ProductsService {
 
   // POST localhost:3000/api/products
   /**
-   *
+   * Creates new product
    * @param userId
    * @param dto
    * @returns newProduct
@@ -61,8 +61,10 @@ export class ProductsService {
       title: dto.title.toLowerCase(), // convert title to lowercase
       user, // assign the user to the product
     });
-    await this.productsRepository.save(newProduct);
-    return newProduct;
+    return this.productsRepository.save(newProduct);
+    // the .save() property is actually who saves and generated the id on runtime,
+    // so if we return the newProduct without await this.productsRepository.save(newProduct),
+    // then the id won't be generated yet.
   }
 
   // GET localhost:3000/api/products

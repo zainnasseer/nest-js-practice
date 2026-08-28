@@ -19,13 +19,17 @@ import { MailModule } from "./mail/mail.module";
 import { LoggerMiddleware } from "./utils/interceptors/middlewares/logger.middleware";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
 import { dataSourceOptions } from "../db/data-source";
+import { AppController } from "./app.controller";
 
 @Module({
   imports: [
     //forRoot is used to register the module in the root module.
     ConfigModule.forRoot({
       isGlobal: true, // makes the ConfigModule available in all other modules
-      envFilePath: `.env.${process.env.NODE_ENV}`,
+      envFilePath:
+        process.env.NODE_ENV !== "production"
+          ? `.env.${process.env.NODE_ENV}`
+          : ".env",
     }),
     TypeOrmModule.forRoot(dataSourceOptions),
     ThrottlerModule.forRoot([
@@ -46,7 +50,7 @@ import { dataSourceOptions } from "../db/data-source";
     { provide: APP_INTERCEPTOR, useClass: ClassSerializerInterceptor }, // apply serializer interceptor to all
     { provide: APP_GUARD, useClass: ThrottlerGuard }, // apply throttler guard to all
   ],
-  controllers: [],
+  controllers: [AppController],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

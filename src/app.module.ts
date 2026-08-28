@@ -6,19 +6,19 @@ import {
   RequestMethod,
 } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { ConfigModule, ConfigService } from "@nestjs/config";
+import { ConfigModule } from "@nestjs/config";
+// import { ConfigService } from "@nestjs/config";
 
 import { UsersModule } from "./users/users.module";
 import { ProductsModule } from "./products/products.module";
 import { ReviewsModule } from "./reviews/reviews.module";
-import { Product } from "./products/product.entity";
-import { User } from "./users/user.entity";
-import { Review } from "./reviews/review.entity";
+
 import { APP_GUARD, APP_INTERCEPTOR } from "@nestjs/core";
 import { UploadsModule } from "./uploads/uploads.module";
 import { MailModule } from "./mail/mail.module";
 import { LoggerMiddleware } from "./utils/interceptors/middlewares/logger.middleware";
 import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
+import { dataSourceOptions } from "../db/data-source";
 
 @Module({
   imports: [
@@ -27,21 +27,7 @@ import { ThrottlerGuard, ThrottlerModule } from "@nestjs/throttler";
       isGlobal: true, // makes the ConfigModule available in all other modules
       envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
-    TypeOrmModule.forRootAsync({
-      inject: [ConfigService], //ConfigService used to access env variables
-      useFactory: (config: ConfigService) => {
-        return {
-          type: "postgres",
-          database: config.get<string>("DB_DATABASE"),
-          username: config.get<string>("DB_USERNAME"),
-          password: config.get<string>("DB_PASSWORD"),
-          host: "localhost",
-          port: config.get<number>("DB_PORT"),
-          synchronize: process.env.NODE_ENV !== "production", // true if aint prod.
-          entities: [Product, User, Review],
-        };
-      },
-    }),
+    TypeOrmModule.forRoot(dataSourceOptions),
     ThrottlerModule.forRoot([
       {
         ttl: 60000, // after 60 seconds
@@ -76,3 +62,20 @@ export class AppModule implements NestModule {
       .forRoutes({ path: "api/users/auth/login", method: RequestMethod.ALL });
   }
 }
+
+// Local database configuration
+//  {
+//       inject: [ConfigService], //ConfigService used to access env variables
+//       useFactory: (config: ConfigService) => {
+//         return {
+//           type: "postgres",
+//           database: config.get<string>("DB_DATABASE"),
+//           username: config.get<string>("DB_USERNAME"),
+//           password: config.get<string>("DB_PASSWORD"),
+//           host: "localhost",
+//           port: config.get<number>("DB_PORT"),
+//           synchronize: process.env.NODE_ENV !== "production", // true if aint prod.
+//           entities: [Product, User, Review],
+//         };
+//       },
+//     }

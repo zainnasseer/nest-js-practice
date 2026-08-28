@@ -52,8 +52,8 @@ describe("ProductsService", () => {
         {
           provide: UsersService,
           useValue: {
-            getCurrentUser: jest.fn(
-              (userId: number) => Promise.resolve({ id: userId })
+            getCurrentUser: jest.fn((userId: number) =>
+              Promise.resolve({ id: userId })
             ),
           },
         },
@@ -61,8 +61,8 @@ describe("ProductsService", () => {
           provide: REPOSITORY_TOKEN,
           useValue: {
             create: jest.fn((dto: CreateProductDto) => dto),
-            save: jest.fn(
-              (dto: CreateProductDto) => Promise.resolve({ ...dto, id: 1 })
+            save: jest.fn((dto: CreateProductDto) =>
+              Promise.resolve({ ...dto, id: 1 })
             ),
             find: jest.fn((options?: Options) => {
               // title: Like("%p1%") — strip the % wildcards to get the search term
@@ -76,10 +76,13 @@ describe("ProductsService", () => {
 
               // price: Between(1, 2) — value is a [min, max] tuple
               // Cast via unknown because FindOperator<number>.value is typed as
-              // `number | FindOperator<number>`, not `[number, number]`.
+              // `number | FindOperator<number>`, not `[number, number]` by TypeORM.
               const priceOp = options?.where?.price;
               if (priceOp) {
-                const [minPrice, maxPrice] = priceOp.value as unknown as [number, number];
+                const [minPrice, maxPrice] = priceOp.value as unknown as [
+                  number,
+                  number,
+                ];
                 return Promise.resolve(
                   products.filter(
                     (product) =>
@@ -127,7 +130,10 @@ describe("ProductsService", () => {
     });
 
     it("should return the newly created product", async () => {
-      const result = await productsService.createProduct(1, mockCreateProductDto);
+      const result = await productsService.createProduct(
+        1,
+        mockCreateProductDto
+      );
       expect(result).toBeDefined();
       expect(result.title).toBe(mockCreateProductDto.title.toLowerCase());
       expect(result.price).toBe(mockCreateProductDto.price);
@@ -161,9 +167,7 @@ describe("ProductsService", () => {
       const result = await productsService.getAllProducts(undefined, "1", "2");
       expect(result).toBeDefined();
       expect(result).toEqual(
-        products.filter(
-          (product) => product.price >= 1 && product.price <= 2
-        )
+        products.filter((product) => product.price >= 1 && product.price <= 2)
       );
     });
   });

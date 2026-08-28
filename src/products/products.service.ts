@@ -72,7 +72,11 @@ export class ProductsService {
    *
    * @returns All products in db
    */
-  public getAllProducts(title?: string, minPrice?: string, maxPrice?: string) {
+  public getAllProducts(
+    title?: string,
+    minPrice?: string | number,
+    maxPrice?: string | number
+  ) {
     const filters = {
       ...(title ? { title: Like(`%${title.toLowerCase()}%`) } : {}),
       ...(minPrice || maxPrice
